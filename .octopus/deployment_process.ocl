@@ -1,5 +1,5 @@
 step "check-dir" {
-    name = "Check DIR"
+    name = "Fetch From Git Repo"
 
     action {
         action_type = "Octopus.Script"
