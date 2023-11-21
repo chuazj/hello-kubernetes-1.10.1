@@ -72,7 +72,7 @@ step "cp-to-docker" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                #docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
+                docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
                 
                 rootpath=$(ls /)
                 echo "Docker / path:" $rootpath
@@ -84,6 +84,17 @@ step "cp-to-docker" {
             Octopus.Action.Script.Syntax = "Bash"
         }
         worker_pool = "default-worker-pool"
+
+        packages "basiclinuxvm" {
+            acquisition_location = "Server"
+            feed = "github-repo-feed"
+            package_id = "chuazj/basiclinuxvm"
+            properties = {
+                Extract = "True"
+                Purpose = ""
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
 
