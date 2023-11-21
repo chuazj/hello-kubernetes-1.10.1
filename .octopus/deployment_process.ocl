@@ -71,10 +71,10 @@ step "cp-to-docker" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                docker cp ./$(get_octopusvariable "Octopus.Action.Package[basiclinuxvm].ExtractedPath") 4ef1bed13e6a:/root
+                docker cp ./$(get_octopusvariable "Octopus.Action.Package[basiclinuxvm].ExtractedPath") 4ef1bed13e6a:/
                 
-                rootpath=$(ls -lah /root)
-                echo "Docker /root path:" $rootpath
+                rootpath=$(ls /)
+                echo "Docker / path:" $rootpath
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
