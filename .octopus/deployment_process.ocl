@@ -1,5 +1,5 @@
 step "check-dir" {
-    name = "Fetch From Git Repo"
+    name = "fetch-git"
 
     action {
         action_type = "Octopus.Script"
@@ -27,23 +27,8 @@ step "check-dir" {
     }
 }
 
-step "login-dsl" {
-    name = "Login DSL"
-
-    action {
-        action_type = "Octopus.Script"
-        is_disabled = true
-        properties = {
-            Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
-            Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "Bash"
-        }
-        worker_pool = "default-worker-pool"
-    }
-}
-
 step "run-a-script" {
-    name = "Run a Script"
+    name = "start-dsl"
     properties = {
         Octopus.Action.TargetRoles = "octtentv001"
     }
@@ -62,5 +47,19 @@ step "run-a-script" {
             Octopus.Action.Script.Syntax = "Bash"
         }
         worker_pool_variable = ""
+    }
+}
+
+step "init-dsl" {
+    name = "init-dsl"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm init dsl -i 10.129.34.5 -P 9440 -pj default -u $(get_octopusvariable \"PC Admin Account\") -p $pcadmpwd"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool = "default-worker-pool"
     }
 }
