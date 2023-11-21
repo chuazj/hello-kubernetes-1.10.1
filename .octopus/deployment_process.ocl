@@ -79,3 +79,17 @@ step "cp-to-docker" {
         worker_pool = "default-worker-pool"
     }
 }
+
+step "create-calm-bp" {
+    name = "create-calm-bp"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm create bp --file /root/BasicLinuxVM/blueprint.py --name HelloBlueprint_v$(get_octopusvariable \"Octopus.Release.Id\")"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool = "default-worker-pool"
+    }
+}
