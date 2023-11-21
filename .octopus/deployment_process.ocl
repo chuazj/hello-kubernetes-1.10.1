@@ -63,3 +63,17 @@ step "init-dsl" {
         worker_pool = "default-worker-pool"
     }
 }
+
+step "cp-to-docker" {
+    name = "cp-to-docker"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool = "default-worker-pool"
+    }
+}
