@@ -47,7 +47,11 @@ step "list-dsl" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = "which calm"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                docker container start -i 303a8700fcf2
+                docker exec -i fc4c6bd39b5c/bin/bash
+                docker exec -i which calm
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
