@@ -74,11 +74,8 @@ step "cp-to-docker" {
             Octopus.Action.Script.ScriptBody = <<-EOT
                 docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
                 
-                lista=$(ls /)
-                echo "Docker / path:" $lista
-                
-                listb=$(ls ./)
-                echo "List ./:" $listb
+                #lista=$(ls /)
+                #echo "Docker / path:" $lista
                 
                 listc=$(docker exec -i 4ef1bed13e6a ls ./BasicLinuxVM)
                 echo "List in Docker ./BasicLinuxVM/:" $listc
@@ -106,9 +103,8 @@ step "create-calm-bp" {
 
     action {
         action_type = "Octopus.Script"
-        is_disabled = true
         properties = {
-            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm create bp --file /root/BasicLinuxVM/blueprint.py --name HelloBlueprint_v$(get_octopusvariable \"Octopus.Release.Id\")"
+            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm create bp --file ./BasicLinuxVM/blueprint.py --name BasicLinuxVM_v$(get_octopusvariable \"Octopus.Release.Id\")"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
