@@ -70,7 +70,7 @@ step "cp-to-docker" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = "docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/"
+            Octopus.Action.Script.ScriptBody = "docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/root"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
