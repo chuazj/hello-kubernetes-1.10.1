@@ -8,6 +8,8 @@ step "check-dir" {
                 pwd
                 
                 ls -lah ./basiclinuxvm/BasicLinuxVM
+                ExtractedPath=$(get_octopusvariable "Octopus.Action.Package[basiclinuxvm].PackageId")
+                echo "ExtractedPath:" $ExtractedPath
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
