@@ -1,36 +1,10 @@
-step "pull-blueprints-from-github" {
-    name = "Pull Blueprints from GitHub"
-    properties = {
-        Octopus.Action.TargetRoles = "octtentv001"
-    }
-
-    action {
-        action_type = "Octopus.TransferPackage"
-        properties = {
-            Octopus.Action.Package.DownloadOnTentacle = "False"
-            Octopus.Action.Package.FeedId = "github-repo-feed"
-            Octopus.Action.Package.PackageId = "chuazj/basiclinuxvm"
-            Octopus.Action.Package.TransferPath = "/BasicLinuxVM"
-        }
-        worker_pool_variable = ""
-
-        packages {
-            acquisition_location = "Server"
-            feed = "github-repo-feed"
-            package_id = "chuazj/basiclinuxvm"
-            properties = {
-                SelectionMode = "immediate"
-            }
-        }
-    }
-}
-
 step "check-dir" {
     name = "Check DIR"
 
     action {
         action_type = "Octopus.Script"
         properties = {
+            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 pwd
                 ls -lah
@@ -38,6 +12,16 @@ step "check-dir" {
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
-        worker_pool = "default-worker-pool"
+
+        packages "basiclinuxvm" {
+            acquisition_location = "Server"
+            feed = "github-repo-feed"
+            package_id = "chuazj/basiclinuxvm"
+            properties = {
+                Extract = "True"
+                Purpose = ""
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
