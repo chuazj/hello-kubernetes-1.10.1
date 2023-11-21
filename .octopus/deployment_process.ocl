@@ -1,16 +1,39 @@
-step "hello-world-using-bash" {
-    name = "Hello world (using Bash)"
+step "pull-blueprints-from-github" {
+    name = "Pull Blueprints from GitHub"
+    properties = {
+        Octopus.Action.TargetRoles = "octtentv001"
+    }
+
+    action {
+        action_type = "Octopus.TransferPackage"
+        properties = {
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "github-repo-feed"
+            Octopus.Action.Package.PackageId = "chuazj/basiclinuxvm"
+            Octopus.Action.Package.TransferPath = "/BasicLinuxVM"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "Server"
+            feed = "github-repo-feed"
+            package_id = "chuazj/basiclinuxvm"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
+
+step "check-dir" {
+    name = "Check DIR"
 
     action {
         action_type = "Octopus.Script"
-        is_required = true
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                echo 'Hello world, using Bash'
-                
-                #TODO: Experiment with steps of your own :)
-                
-                echo '[Learn more about the types of steps available in Octopus](https://oc.to/OnboardingAddStepsLearnMore)'
+                pwd
+                ls -lah
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
