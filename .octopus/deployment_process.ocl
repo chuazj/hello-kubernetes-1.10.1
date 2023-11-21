@@ -47,14 +47,16 @@ step "list-dsl" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = <<-EOT
-                docker container start -i 303a8700fcf2
-                docker exec -i 303a8700fcf2 /bin/bash
-                docker exec -i which calm
-                EOT
+            Octopus.Action.Script.ScriptBody = "which calm"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
+            OctopusUseBundledTooling = "False"
         }
         worker_pool = "default-worker-pool"
+
+        container {
+            feed = "calm-dsl-container"
+            image = "ntnx/calm-dsl:latest"
+        }
     }
 }
