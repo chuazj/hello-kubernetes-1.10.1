@@ -32,7 +32,6 @@ step "login-dsl" {
 
     action {
         action_type = "Octopus.Script"
-        is_disabled = true
         properties = {
             Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
             Octopus.Action.Script.ScriptSource = "Inline"
@@ -42,22 +41,23 @@ step "login-dsl" {
     }
 }
 
-step "list-dsl" {
-    name = "List DSL"
+step "run-a-script" {
+    name = "Run a Script"
+    properties = {
+        Octopus.Action.TargetRoles = "octtentv001"
+    }
 
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = "which calm"
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                docker container list -a
+                docker container start e281b93e12a5
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
-            OctopusUseBundledTooling = "False"
         }
-        worker_pool = "default-worker-pool"
-
-        container {
-            feed = "calm-dsl-container"
-            image = "ntnx/calm-dsl:latest"
-        }
+        worker_pool_variable = ""
     }
 }
