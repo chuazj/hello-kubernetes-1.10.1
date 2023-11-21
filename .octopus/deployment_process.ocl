@@ -6,7 +6,8 @@ step "check-dir" {
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
                 pwd
-                ls -lah
+                
+                ls -lah ./basiclinuxvm
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
