@@ -74,11 +74,14 @@ step "cp-to-docker" {
             Octopus.Action.Script.ScriptBody = <<-EOT
                 docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
                 
-                rootpath=$(ls /)
-                echo "Docker / path:" $rootpath
+                lista=$(ls /)
+                echo "Docker / path:" $lista
                 
-                listfold=$(ls ./)
-                echo "List /BasicLinuxVM:" $listfold
+                listb=$(ls ./)
+                echo "List ./:" $listb
+                
+                listc=$(docker exec -i 4ef1bed13e6a ls ./BasicLinuxVM)
+                echo "List in Docker ./BasicLinuxVM/:" $listc
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
