@@ -33,10 +33,21 @@ step "login-dsl" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = <<-EOT
-                docker run -i ntnx/calm-dsl
-                which calm
-                EOT
+            Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool = "default-worker-pool"
+    }
+}
+
+step "list-dsl" {
+    name = "List DSL"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "which calm"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
