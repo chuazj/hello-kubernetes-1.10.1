@@ -1,0 +1,5 @@
+variable "PC Admin Account" {
+    type = "UsernamePasswordAccount"
+
+    value "pc-admin-account" {}
+}
