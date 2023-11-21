@@ -32,6 +32,7 @@ step "login-dsl" {
 
     action {
         action_type = "Octopus.Script"
+        is_disabled = true
         properties = {
             Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
             Octopus.Action.Script.ScriptSource = "Inline"
@@ -53,7 +54,8 @@ step "run-a-script" {
             Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 docker container list -a
-                docker container start e281b93e12a5
+                docker container start 4ef1bed13e6a
+                docker exec -i 4ef1bed13e6a ls -lah
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
