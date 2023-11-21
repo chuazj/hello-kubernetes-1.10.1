@@ -33,7 +33,10 @@ step "login-dsl" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                docker run -i ntnx/calm-dsl
+                which calm
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
