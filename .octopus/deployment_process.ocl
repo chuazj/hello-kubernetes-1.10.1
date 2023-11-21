@@ -4,7 +4,6 @@ step "check-dir" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 pwd
                 ls -lah
@@ -12,6 +11,7 @@ step "check-dir" {
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
+        worker_pool = "default-worker-pool"
 
         packages "basiclinuxvm" {
             acquisition_location = "Server"
