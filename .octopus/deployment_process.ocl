@@ -56,7 +56,7 @@ step "init-dsl" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm init dsl -i 10.129.34.5 -P 9440 -pj default -u $(get_octopusvariable \"pcusr\") -p $(get_octopusvariable \"pcpwd\")"
+            Octopus.Action.Script.ScriptBody = "docker exec -i 4ef1bed13e6a calm init dsl -i 10.38.251.39 -P 9440 -pj default -u $(get_octopusvariable \"pcusr\") -p $(get_octopusvariable \"pcpwd\")"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
