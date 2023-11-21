@@ -72,12 +72,12 @@ step "cp-to-docker" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
+                #docker cp ./basiclinuxvm/BasicLinuxVM 4ef1bed13e6a:/
                 
                 rootpath=$(ls /)
                 echo "Docker / path:" $rootpath
                 
-                listfold=$(ls ./basiclinuxvm/BasicLinuxVM)
+                listfold=$(ls ./)
                 echo "List /BasicLinuxVM:" $listfold
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
