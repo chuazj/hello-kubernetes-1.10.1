@@ -75,6 +75,9 @@ step "cp-to-docker" {
                 
                 rootpath=$(ls /)
                 echo "Docker / path:" $rootpath
+                
+                listfold=$(ls /BasicLinuxVM)
+                echo "List /BasicLinuxVM:" $listfold
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
