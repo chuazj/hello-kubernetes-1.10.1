@@ -32,6 +32,7 @@ step "login-dsl" {
 
     action {
         action_type = "Octopus.Script"
+        is_disabled = true
         properties = {
             Octopus.Action.Script.ScriptBody = "docker run -i ntnx/calm-dsl"
             Octopus.Action.Script.ScriptSource = "Inline"
