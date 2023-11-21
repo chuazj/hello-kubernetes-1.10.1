@@ -56,6 +56,7 @@ step "run-a-script" {
                 docker container list -a
                 docker container start 4ef1bed13e6a
                 docker exec -i 4ef1bed13e6a ls -lah
+                docker exec -i 4ef1bed13e6a which calm
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
