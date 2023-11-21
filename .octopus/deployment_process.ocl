@@ -6,6 +6,7 @@ step "check-dir" {
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
                 ls -lah ./basiclinuxvm/BasicLinuxVM
+                
                 ExtractedPath=$(get_octopusvariable "Octopus.Action.Package[basiclinuxvm].ExtractedPath")
                 echo "ExtractedPath:" $ExtractedPath
                 EOT
