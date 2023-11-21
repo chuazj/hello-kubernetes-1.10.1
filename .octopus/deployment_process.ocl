@@ -26,3 +26,21 @@ step "check-dir" {
         }
     }
 }
+
+step "login-dsl" {
+    name = "Login DSL"
+    properties = {
+        Octopus.Action.TargetRoles = "octtentv001"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = "docker run -it ntnx/calm-dsl"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool_variable = ""
+    }
+}
